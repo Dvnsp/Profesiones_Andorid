@@ -54,12 +54,18 @@ class ProfesionDetailActivity : AppCompatActivity() {
         mostrarDatosProfesion(profesion!!)
 
         buttonAddToCart.setOnClickListener {
-            CarritoManager.add(profesion!!)
-            AlertDialog.Builder(this)
-                .setTitle("Carrito")
-                .setMessage("Profesión añadida al carrito:\n\n${profesion!!.nombre} (${profesion!!.profesion})")
-                .setPositiveButton("Aceptar", null)
-                .show()
+            profesion?.let { p ->
+                CarritoManager.add(p)
+
+                AlertDialog.Builder(this)
+                    .setTitle("Carrito")
+                    .setMessage("Profesión añadida al carrito:\n\n${p.nombre} (${p.profesion})")
+                    .setPositiveButton("Aceptar") { _, _ ->
+                        // Cuando el usuario pulse Aceptar volvemos a la lista de profesiones
+                        finish()
+                    }
+                    .show()
+            }
         }
 
         buttonCerrarDetalle.setOnClickListener {
