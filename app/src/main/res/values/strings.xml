@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Bricco</string>
+    <string name="welcome_message">Bienvenido a Bricco, tu catálogo de profesiones y servicios del hogar.</string>
+    <string name="welcome_button_enter">Entrar</string>
+</resources>

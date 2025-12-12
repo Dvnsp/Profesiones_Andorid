@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Carrito como icono en la barra -->
+    <item
+        android:id="@+id/action_cart"
+        android:icon="@drawable/baseline_shopping_cart_24"
+        android:title="Carrito"
+        app:showAsAction="always" />
+
+    <!-- Escanear QR -->
+    <item
+        android:id="@+id/action_scan_qr"
+        android:title="Escanear QR"
+        app:showAsAction="never" />
+
+    <!-- Ayuda -->
+    <item
+        android:id="@+id/action_help"
+        android:title="Ayuda"
+        app:showAsAction="never" />
+
+    <!-- Acerca de -->
+    <item
+        android:id="@+id/action_about"
+        android:title="Acerca de"
+        app:showAsAction="never" />
+
+</menu>
