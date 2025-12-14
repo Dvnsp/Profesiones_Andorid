@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Comuvicdam_tf_202526Dvargas">
         <activity
+            android:name=".activity.AddProfesionActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.ReservationConfirmationActivity"
             android:exported="false" />
         <activity

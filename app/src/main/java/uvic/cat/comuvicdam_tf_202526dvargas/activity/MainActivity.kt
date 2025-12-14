@@ -15,6 +15,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanOptions
 import uvic.cat.comuvicdam_tf_202526dvargas.R
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity(), Producto_Adapter.OnItemClickListener {
     private lateinit var recyclerProfesiones: RecyclerView
     private lateinit var adapter: Producto_Adapter
     private lateinit var buttonReservar: Button
+    private lateinit var fabAddProfesion: FloatingActionButton
 
     private lateinit var qrLauncher: ActivityResultLauncher<ScanOptions>
 
@@ -70,6 +72,13 @@ class MainActivity : AppCompatActivity(), Producto_Adapter.OnItemClickListener {
         buttonReservar = findViewById(R.id.buttonReservar)
         buttonReservar.setOnClickListener {
             irAReserva()
+        }
+
+        // 4. FAB para añadir nueva profesión
+        fabAddProfesion = findViewById(R.id.fabAddProfesion)
+        fabAddProfesion.setOnClickListener {
+            val intent = Intent(this@MainActivity, AddProfesionActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -116,7 +125,6 @@ class MainActivity : AppCompatActivity(), Producto_Adapter.OnItemClickListener {
             return
         }
 
-        // Texto que se verá en cada fila
         val nombres = items.mapIndexed { index, profesion ->
             "${index + 1}. ${profesion.nombre} (${profesion.profesion})"
         }.toTypedArray()
@@ -145,7 +153,6 @@ class MainActivity : AppCompatActivity(), Producto_Adapter.OnItemClickListener {
             .setMessage("¿Quieres eliminar '${profesion.nombre} (${profesion.profesion})' del carrito?")
             .setPositiveButton("Eliminar") { _, _ ->
                 CarritoManager.remove(profesion)
-                // Volvemos a mostrar el carrito actualizado
                 mostrarCarrito()
             }
             .setNegativeButton("Cancelar", null)
@@ -234,6 +241,9 @@ class MainActivity : AppCompatActivity(), Producto_Adapter.OnItemClickListener {
 
     override fun onResume() {
         super.onResume()
+        val profesionesActualizadas: List<Profesion> = DataManager.getProfesiones()
+        adapter = Producto_Adapter(profesionesActualizadas, this)
+        recyclerProfesiones.adapter = adapter
         invalidateOptionsMenu()
     }
 }

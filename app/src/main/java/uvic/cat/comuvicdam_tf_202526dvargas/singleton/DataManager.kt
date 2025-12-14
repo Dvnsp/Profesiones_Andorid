@@ -14,7 +14,7 @@ object DataManager {
     private var dbHelper: BriccoDbHelper? = null
 
     /**
-     * Se debe llamar UNA VEZ al iniciar la app (por ejemplo en MainActivity).
+     * Se debe llamar UNA VEZ al iniciar la app (por ejemplo en SplashActivity).
      */
     fun init(context: Context) {
         if (dbHelper == null) {
@@ -32,6 +32,22 @@ object DataManager {
     private fun getWritableDb(): SQLiteDatabase {
         return dbHelper?.writableDatabase
             ?: throw IllegalStateException("DataManager no inicializado. Llama a DataManager.init(context) primero.")
+    }
+
+    /**
+     * Añadir una nueva profesión usando la BD (INSERT).
+     * Deja la profesión guardada en SQLite y actualiza su id si es posible.
+     */
+    fun addProfesion(profesion: Profesion) {
+        // Guardamos en la BD usando el método que ya tienes
+        val newId = insertProfesion(profesion)
+
+        // Si tu clase Profesion tiene setId(Long), lo actualizamos:
+        try {
+            profesion.id = newId   // Kotlin usa getId/setId de la clase Java
+        } catch (e: Exception) {
+            Log.w(TAG, "No se pudo actualizar el id en el objeto Profesion, pero se insertó en BD con id=$newId")
+        }
     }
 
     /**
@@ -106,6 +122,27 @@ object DataManager {
     }
 
     /**
+     * Elimina una profesión de la base de datos por su id.
+     */
+    fun deleteProfesion(profesion: Profesion) {
+        val id = profesion.id
+
+        if (id == null) {
+            Log.w(TAG, "deleteProfesion: profesión sin id, no se puede borrar: $profesion")
+            return
+        }
+
+        val db = getWritableDb()
+        val rows = db.delete(
+            BriccoDbHelper.TABLE_PROFESIONES,
+            "${BriccoDbHelper.COL_PROF_ID} = ?",
+            arrayOf(id.toString())
+        )
+
+        Log.i(TAG, "deleteProfesion: borradas $rows filas para id = $id")
+    }
+
+    /**
      * Inserta las profesiones base sólo si la tabla está vacía.
      */
     private fun ensureBaseProfesiones() {
@@ -129,7 +166,6 @@ object DataManager {
 
         Log.i(TAG, "ensureBaseProfesiones: tabla vacía, insertando profesiones base...")
 
-        // Aquí metemos las 10 profesiones base que definimos
         val baseProfesiones = listOf(
             Profesion(
                 null,

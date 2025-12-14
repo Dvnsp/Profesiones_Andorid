@@ -101,6 +101,33 @@
         app:layout_constraintTop_toBottomOf="@id/imageQrProfesion"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+    <!-- Botón para editar profesión (solo si es del usuario) -->
+
+    <!-- Botón para eliminar profesión (solo si es del usuario) -->
+
+    <Button
+        android:id="@+id/buttonEditarProfesion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="Editar profesión"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonAddToCart" />
+
+    <Button
+        android:id="@+id/buttonEliminarProfesion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Eliminar profesión"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toBottomOf="@id/buttonEditarProfesion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
     <!-- Botón Cerrar -->
     <Button

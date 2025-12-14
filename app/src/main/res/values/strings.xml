@@ -1,5 +1,40 @@
-<resources>
-    <string name="app_name">Bricco</string>
-    <string name="welcome_message">Bienvenido a Bricco, tu catálogo de profesiones y servicios del hogar.</string>
-    <string name="welcome_button_enter">Entrar</string>
-</resources>
+<!-- ========= GLOBAL ========= -->
+<string name="app_name">Bricco</string>
+<string name="dialog_ok">Aceptar</string>
+<string name="dialog_cancel">Cancelar</string>
+
+    <!-- ========= WELCOME ========= -->
+<string name="welcome_author">Duván Vargas</string>
+<string name="welcome_message">Bienvenido a la aplicación Bricco</string>
+<string name="welcome_button_enter">Entrar</string>
+
+    <!-- ========= MAIN / CATÁLOGO ========= -->
+<string name="main_title">Bricco</string>
+<string name="main_button_reservar">Ver carrito / Reservar</string>
+
+    <!-- Menú superior -->
+<string name="menu_action_cart">Carrito</string>
+<string name="menu_action_scan_qr">Escanear QR</string>
+<string name="menu_action_help">Ayuda</string>
+<string name="menu_action_about">Acerca de</string>
+
+    <!-- Textos carrito en MainActivity -->
+<string name="cart_title">Carrito</string>
+<string name="cart_empty">El carrito está vacío.</string>
+<string name="cart_items_header">Profesiones en el carrito:</string>
+<string name="cart_clear_all">Vaciar todo</string>
+<string name="cart_cleared_ok">Carrito vaciado correctamente.</string>
+
+<string name="cart_delete_title">Eliminar del carrito</string>
+<string name="cart_delete_message">¿Quieres eliminar '%1$s (%2$s)' del carrito?</string>
+
+    <!-- Ayuda / Acerca de en MainActivity -->
+<string name="help_title">Ayuda</string>
+<string name="help_main_message">Desde esta pantalla puedes:\n\n• Ver el catálogo de profesiones.\n• Pulsar sobre una profesión para ver su detalle.\n• Añadir profesiones al carrito.\n• Pulsar el botón Reservar para elegir fecha y hora.\n• Usar el icono del carrito para ver, eliminar o vaciar las profesiones añadidas.\n• Usar el menú de los tres puntos para escanear un QR, ver ayuda o ver información de la app.</string>
+
+<string name="about_title">Acerca de</string>
+<string name="about_main_message">Bricco – Catálogo de profesiones y servicios del hogar.\n\nAutor: Duván Vargas\nVersión: 1.0 (práctica Android)</string>
+
+    <!-- Reserva (solo textos usados en MainActivity) -->
+<string name="reservation_title">Reserva</string>
+<string name="reservation_need_items">Para reservar, primero añade al menos una profesión al carrito.</string></resources>

@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/reservation_root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
     <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
@@ -24,85 +23,88 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="Profesiones en la reserva:"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Profesiones en la reserva: 0"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarReservation"
+        app:layout_constraintTop_toBottomOf="@id/toolbarReservation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Lista de profesiones (texto simple) -->
+    <!-- Listado de profesiones -->
     <TextView
         android:id="@+id/textListadoProfesiones"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="1. Fontanero...\n2. Electricista..."
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/textResumenCarrito"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Título fecha -->
-    <TextView
-        android:id="@+id/textFechaTitulo"
-        android:layout_width="wrap_content"
+    <!-- Contenedor VERTICAL para fecha y hora (centrado) -->
+    <LinearLayout
+        android:id="@+id/layoutDateTime"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Selecciona la fecha:"
-        android:textSize="15sp"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
         app:layout_constraintTop_toBottomOf="@id/textListadoProfesiones"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <!-- DatePicker -->
-    <DatePicker
-        android:id="@+id/datePickerReserva"
+        <!-- DatePicker en modo spinner, ahora con todo su ancho -->
+        <DatePicker
+            android:id="@+id/datePickerReserva"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner" />
+
+        <!-- Separación pequeña -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp" />
+
+        <!-- TimePicker en modo spinner -->
+        <TimePicker
+            android:id="@+id/timePickerReserva"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:timePickerMode="spinner" />
+    </LinearLayout>
+
+    <!-- Botones abajo fijados -->
+    <LinearLayout
+        android:id="@+id/layoutButtons"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:calendarViewShown="true"
-        app:layout_constraintTop_toBottomOf="@id/textFechaTitulo"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <!-- Título hora -->
-    <TextView
-        android:id="@+id/textHoraTitulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Selecciona la hora:"
-        android:textSize="15sp"
-        app:layout_constraintTop_toBottomOf="@id/datePickerReserva"
-        app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/buttonCancelarReserva"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancelar" />
 
-    <!-- TimePicker -->
-    <TimePicker
-        android:id="@+id/timePickerReserva"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/textHoraTitulo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-    <!-- Botón Confirmar -->
-    <Button
-        android:id="@+id/buttonConfirmarReserva"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Confirmar reserva"
-        app:layout_constraintTop_toBottomOf="@id/timePickerReserva"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Botón Cancelar -->
-    <Button
-        android:id="@+id/buttonCancelarReserva"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Cancelar"
-        app:layout_constraintTop_toBottomOf="@id/buttonConfirmarReserva"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <Button
+            android:id="@+id/buttonConfirmarReserva"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:text="Confirmar reserva" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
