@@ -38,12 +38,10 @@ class MainActivity : AppCompatActivity(), Producto_Adapter.OnItemClickListener {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        // Toolbar como ActionBar
         val toolbar: Toolbar = findViewById(R.id.toolbarMain)
         setSupportActionBar(toolbar)
-        supportActionBar?.title = "Bricco"
+        supportActionBar?.title = getString(R.string.main_title)
 
-        // Lanzador para el escáner de QR
         qrLauncher = registerForActivityResult(ScanContract()) { result ->
             if (result.contents != null) {
                 mostrarResultadoQR(result.contents)
@@ -52,32 +50,27 @@ class MainActivity : AppCompatActivity(), Producto_Adapter.OnItemClickListener {
             }
         }
 
-        // Ajuste de insets (barra de estado, etc.)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // 1. Obtener lista de profesiones desde DataManager (SQLite)
         val profesiones: List<Profesion> = DataManager.getProfesiones()
 
-        // 2. Configurar RecyclerView en grid de 2 columnas
         recyclerProfesiones = findViewById(R.id.recyclerProfesiones)
         recyclerProfesiones.layoutManager = GridLayoutManager(this, 2)
         adapter = Producto_Adapter(profesiones, this)
         recyclerProfesiones.adapter = adapter
 
-        // 3. Botón inferior para ir a la reserva
         buttonReservar = findViewById(R.id.buttonReservar)
         buttonReservar.setOnClickListener {
             irAReserva()
         }
 
-        // 4. FAB para añadir nueva profesión
         fabAddProfesion = findViewById(R.id.fabAddProfesion)
         fabAddProfesion.setOnClickListener {
-            val intent = Intent(this@MainActivity, AddProfesionActivity::class.java)
+            val intent = Intent(this, AddProfesionActivity::class.java)
             startActivity(intent)
         }
     }
@@ -111,16 +104,16 @@ class MainActivity : AppCompatActivity(), Producto_Adapter.OnItemClickListener {
         }
     }
 
-    // ===== LÓGICA DEL CARRITO Y MENSAJES =====
+    // ===== CARRITO =====
 
     private fun mostrarCarrito() {
         val items = CarritoManager.getAll()
 
         if (items.isEmpty()) {
             AlertDialog.Builder(this)
-                .setTitle("Carrito")
-                .setMessage("El carrito está vacío.")
-                .setPositiveButton("Cerrar", null)
+                .setTitle(getString(R.string.cart_title))
+                .setMessage(getString(R.string.cart_empty))
+                .setPositiveButton(getString(R.string.dialog_ok), null)
                 .show()
             return
         }
@@ -130,66 +123,54 @@ class MainActivity : AppCompatActivity(), Producto_Adapter.OnItemClickListener {
         }.toTypedArray()
 
         AlertDialog.Builder(this)
-            .setTitle("Carrito")
+            .setTitle(getString(R.string.cart_title))
             .setItems(nombres) { _, which ->
                 val profesionSeleccionada = items[which]
                 confirmarEliminarDelCarrito(profesionSeleccionada)
             }
-            .setPositiveButton("Vaciar todo") { _, _ ->
+            .setPositiveButton(getString(R.string.cart_clear_all)) { _, _ ->
                 CarritoManager.clear()
                 AlertDialog.Builder(this)
-                    .setTitle("Carrito")
-                    .setMessage("Carrito vaciado correctamente.")
-                    .setPositiveButton("Aceptar", null)
+                    .setTitle(getString(R.string.cart_title))
+                    .setMessage(getString(R.string.cart_cleared_ok))
+                    .setPositiveButton(getString(R.string.dialog_ok), null)
                     .show()
             }
-            .setNegativeButton("Cerrar", null)
+            .setNegativeButton(getString(R.string.dialog_cancel), null)
             .show()
     }
 
     private fun confirmarEliminarDelCarrito(profesion: Profesion) {
         AlertDialog.Builder(this)
-            .setTitle("Eliminar del carrito")
-            .setMessage("¿Quieres eliminar '${profesion.nombre} (${profesion.profesion})' del carrito?")
-            .setPositiveButton("Eliminar") { _, _ ->
+            .setTitle(getString(R.string.cart_delete_title))
+            .setMessage(
+                getString(
+                    R.string.cart_delete_message,
+                    profesion.nombre,
+                    profesion.profesion
+                )
+            )
+            .setPositiveButton(getString(R.string.dialog_ok)) { _, _ ->
                 CarritoManager.remove(profesion)
                 mostrarCarrito()
             }
-            .setNegativeButton("Cancelar", null)
+            .setNegativeButton(getString(R.string.dialog_cancel), null)
             .show()
     }
 
     private fun mostrarAyuda() {
-        val mensaje = """
-            Desde esta pantalla puedes:
-            
-            • Ver el catálogo de profesiones.
-            • Pulsar sobre una profesión para ver su detalle.
-            • Añadir profesiones al carrito.
-            • Pulsar el botón Reservar para elegir fecha y hora.
-            • Usar el icono del carrito para ver, eliminar o vaciar las profesiones añadidas.
-            • Usar el menú de los tres puntos para escanear un QR, ver ayuda o ver información de la app.
-        """.trimIndent()
-
         AlertDialog.Builder(this)
-            .setTitle("Ayuda")
-            .setMessage(mensaje)
-            .setPositiveButton("Cerrar", null)
+            .setTitle(getString(R.string.help_title))
+            .setMessage(getString(R.string.help_main_message))
+            .setPositiveButton(getString(R.string.dialog_ok), null)
             .show()
     }
 
     private fun mostrarAcercaDe() {
-        val mensaje = """
-            Bricco – Catálogo de profesiones y servicios del hogar.
-            
-            Autor: Duván Vargas
-            Versión: 1.0 (práctica Android)
-        """.trimIndent()
-
         AlertDialog.Builder(this)
-            .setTitle("Acerca de")
-            .setMessage(mensaje)
-            .setPositiveButton("Cerrar", null)
+            .setTitle(getString(R.string.about_title))
+            .setMessage(getString(R.string.about_main_message))
+            .setPositiveButton(getString(R.string.dialog_ok), null)
             .show()
     }
 
@@ -211,7 +192,7 @@ class MainActivity : AppCompatActivity(), Producto_Adapter.OnItemClickListener {
         AlertDialog.Builder(this)
             .setTitle("QR leído")
             .setMessage(textoQR)
-            .setPositiveButton("Cerrar", null)
+            .setPositiveButton(getString(R.string.dialog_ok), null)
             .show()
     }
 
@@ -220,9 +201,9 @@ class MainActivity : AppCompatActivity(), Producto_Adapter.OnItemClickListener {
     private fun irAReserva() {
         if (CarritoManager.isEmpty()) {
             AlertDialog.Builder(this)
-                .setTitle("Reserva")
-                .setMessage("Para reservar, primero añade al menos una profesión al carrito.")
-                .setPositiveButton("Aceptar", null)
+                .setTitle(getString(R.string.reservation_title))
+                .setMessage(getString(R.string.reservation_need_items))
+                .setPositiveButton(getString(R.string.dialog_ok), null)
                 .show()
             return
         }

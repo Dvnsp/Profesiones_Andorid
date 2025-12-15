@@ -5,50 +5,50 @@
     android:id="@+id/welcome_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp">
+    android:padding="24dp"
+    tools:context=".activity.WelcomeActivity">
 
-    <!-- Título: nombre de la app -->
+    <!-- Título: autor -->
     <TextView
         android:id="@+id/textTitleWelcome"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="124dp"
-        android:text="Duván Vargas"
+        android:text="@string/welcome_author"
         android:textColor="@android:color/black"
         android:textSize="26sp"
         android:textStyle="bold"
+        android:textAlignment="center"
+        android:gravity="center_horizontal"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5" />
 
-    <!-- Mensaje de bienvenida centrado y en negrita -->
-
-    <!-- Botón Entrar -->
+    <!-- Mensaje de bienvenida -->
     <TextView
         android:id="@+id/textSubtitleWelcome"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
-        android:gravity="center"
-        android:text="Bienvenido a Bricco"
+        android:layout_marginTop="24dp"
+        android:text="@string/welcome_message"
+        android:textSize="16sp"
         android:textAlignment="center"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/textTitleWelcome"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textTitleWelcome" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5" />
 
+    <!-- Botón Entrar -->
     <Button
         android:id="@+id/buttonEntrar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="164dp"
+        android:layout_marginTop="48dp"
         android:text="@string/welcome_button_enter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@id/textSubtitleWelcome"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textSubtitleWelcome" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

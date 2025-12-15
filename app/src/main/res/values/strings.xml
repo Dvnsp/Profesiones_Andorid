@@ -1,40 +1,98 @@
-<!-- ========= GLOBAL ========= -->
-<string name="app_name">Bricco</string>
-<string name="dialog_ok">Aceptar</string>
-<string name="dialog_cancel">Cancelar</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
 
-    <!-- ========= WELCOME ========= -->
-<string name="welcome_author">Duván Vargas</string>
-<string name="welcome_message">Bienvenido a la aplicación Bricco</string>
-<string name="welcome_button_enter">Entrar</string>
+    <!-- ===== GLOBAL ===== -->
+    <string name="app_name">Bricco</string>
+    <string name="dialog_ok">Aceptar</string>
+    <string name="dialog_cancel">Cancelar</string>
 
-    <!-- ========= MAIN / CATÁLOGO ========= -->
-<string name="main_title">Bricco</string>
-<string name="main_button_reservar">Ver carrito / Reservar</string>
+    <!-- ===== WELCOME ===== -->
+    <string name="welcome_author">Duván Vargas</string>
+    <string name="welcome_message">Bienvenido a la aplicación Bricco</string>
+    <string name="welcome_button_enter">Entrar</string>
+
+    <!-- ===== MAIN / CATÁLOGO ===== -->
+    <string name="main_title">Bricco</string>
+    <string name="main_button_reservar">Ver carrito / Reservar</string>
 
     <!-- Menú superior -->
-<string name="menu_action_cart">Carrito</string>
-<string name="menu_action_scan_qr">Escanear QR</string>
-<string name="menu_action_help">Ayuda</string>
-<string name="menu_action_about">Acerca de</string>
+    <string name="menu_action_cart">Carrito</string>
+    <string name="menu_action_scan_qr">Escanear QR</string>
+    <string name="menu_action_help">Ayuda</string>
+    <string name="menu_action_about">Acerca de</string>
 
-    <!-- Textos carrito en MainActivity -->
-<string name="cart_title">Carrito</string>
-<string name="cart_empty">El carrito está vacío.</string>
-<string name="cart_items_header">Profesiones en el carrito:</string>
-<string name="cart_clear_all">Vaciar todo</string>
-<string name="cart_cleared_ok">Carrito vaciado correctamente.</string>
+    <!-- Carrito (MainActivity) -->
+    <string name="cart_title">Carrito</string>
+    <string name="cart_empty">El carrito está vacío.</string>
+    <string name="cart_items_header">Profesiones en el carrito:</string>
+    <string name="cart_clear_all">Vaciar todo</string>
+    <string name="cart_cleared_ok">Carrito vaciado correctamente.</string>
 
-<string name="cart_delete_title">Eliminar del carrito</string>
-<string name="cart_delete_message">¿Quieres eliminar '%1$s (%2$s)' del carrito?</string>
+    <string name="cart_delete_title">Eliminar del carrito</string>
+    <string name="cart_delete_message">
+        ¿Quieres eliminar %1$s (%2$s) del carrito?
+    </string>
 
-    <!-- Ayuda / Acerca de en MainActivity -->
-<string name="help_title">Ayuda</string>
-<string name="help_main_message">Desde esta pantalla puedes:\n\n• Ver el catálogo de profesiones.\n• Pulsar sobre una profesión para ver su detalle.\n• Añadir profesiones al carrito.\n• Pulsar el botón Reservar para elegir fecha y hora.\n• Usar el icono del carrito para ver, eliminar o vaciar las profesiones añadidas.\n• Usar el menú de los tres puntos para escanear un QR, ver ayuda o ver información de la app.</string>
+    <!-- Ayuda / Acerca de -->
+    <string name="help_title">Ayuda</string>
+    <string name="help_main_message">
+        Desde esta pantalla puedes:\n\n• Ver el catálogo de profesiones.\n• Pulsar sobre una profesión para ver su detalle.\n• Añadir profesiones al carrito.\n• Pulsar el botón Reservar para elegir fecha y hora.\n• Usar el icono del carrito para ver, eliminar o vaciar las profesiones añadidas.\n• Usar el menú de los tres puntos para escanear un QR, ver ayuda o ver información de la app.
+    </string>
 
-<string name="about_title">Acerca de</string>
-<string name="about_main_message">Bricco – Catálogo de profesiones y servicios del hogar.\n\nAutor: Duván Vargas\nVersión: 1.0 (práctica Android)</string>
+    <string name="about_title">Acerca de</string>
+    <string name="about_main_message">
+        Bricco – Catálogo de profesiones y servicios del hogar.\n\nAutor: Duván Vargas\nVersión: 1.0 (práctica Android)
+    </string>
 
-    <!-- Reserva (solo textos usados en MainActivity) -->
-<string name="reservation_title">Reserva</string>
-<string name="reservation_need_items">Para reservar, primero añade al menos una profesión al carrito.</string></resources>
+    <!-- Reserva (mensajes que usa MainActivity) -->
+    <string name="reservation_title">Reserva</string>
+    <string name="reservation_need_items">
+        Para reservar, primero añade al menos una profesión al carrito.
+    </string>
+
+    <!-- ===== DETALLE PROFESIÓN ===== -->
+    <string name="detail_title">Detalle</string>
+    <string name="detail_default_zones">Zonas no especificadas</string>
+    <string name="detail_default_price">Precio no disponible</string>
+    <string name="detail_zones_label">Zonas de trabajo: %1$s</string>
+
+    <string name="detail_button_add_to_cart">Añadir al carrito</string>
+    <string name="detail_button_edit">Editar profesión</string>
+    <string name="detail_button_delete">Eliminar profesión</string>
+    <string name="detail_button_close">Cerrar</string>
+
+    <!-- Diálogos en detalle -->
+    <string name="dialog_cart_title">Carrito</string>
+    <string name="dialog_cart_added_message">
+        Profesión añadida al carrito:\n\n%1$s (%2$s)
+    </string>
+
+    <string name="dialog_edit_title">Editar profesión</string>
+    <string name="dialog_edit_message">
+        Modo edición se implementará más adelante reutilizando el formulario de alta.
+    </string>
+
+    <string name="dialog_delete_title">Eliminar profesión</string>
+    <string name="dialog_delete_message">
+        ¿Seguro que quieres eliminar %1$s (%2$s) del catálogo?
+    </string>
+
+    <!-- Texto QR -->
+    <string name="qr_header">BRICCO – TARJETA PROFESIONAL</string>
+    <string name="qr_label_profession">Profesión</string>
+    <string name="qr_label_business_name">Nombre comercial</string>
+    <string name="qr_label_price">Precio orientativo</string>
+    <string name="qr_label_zones">Zonas de trabajo</string>
+    <string name="qr_label_contact">Contacto</string>
+    <string name="qr_label_social">Redes</string>
+    <!-- Alta de profesión -->
+    <string name="add_prof_title">Nueva profesión</string>
+    <string name="add_prof_hint_nombre">Nombre comercial</string>
+    <string name="add_prof_hint_profesion">Profesión (fontanero, carpintero...)</string>
+    <string name="add_prof_hint_zonas">Zonas de trabajo (Barcelona, Vic...)</string>
+    <string name="add_prof_hint_precio">Precio orientativo (ej: 50 €/h)</string>
+    <string name="add_prof_button_save">Guardar profesión</string>
+    <string name="add_prof_button_cancel">Cancelar</string>
+
+
+</resources>
