@@ -13,6 +13,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.WriterException
 import com.google.zxing.qrcode.QRCodeWriter
@@ -130,7 +131,29 @@ class ProfesionDetailActivity : AppCompatActivity() {
                 getString(R.string.detail_default_price)
             } ?: getString(R.string.detail_default_price)
 
-        imageProfesionDetail.setImageResource(R.drawable.logo_bricco)
+        // Configurar icono según profesión (lógica copiada del Adapter para consistencia)
+        val iconResId = when (p.profesion?.lowercase()?.trim()) {
+            "fontanero" -> R.drawable.ic_plumber
+            "electricista" -> R.drawable.ic_electrician
+            "carpintero", "ebanista" -> R.drawable.ic_carpenter
+            "pintor" -> R.drawable.ic_painter
+            "jardinero" -> R.drawable.ic_gardener
+            "cerrajero" -> R.drawable.ic_locksmith
+            else -> R.drawable.ic_handyman
+        }
+
+        imageProfesionDetail.setImageResource(iconResId)
+        // Aplicar tinte primario al icono para que coincida con el tema (opcional, pero consistente)
+        imageProfesionDetail.setColorFilter(ContextCompat.getColor(this, R.color.primaryColor))
+        
+        // Ajustar el scaleType para que el icono se vea bien dentro del espacio reservado
+        imageProfesionDetail.scaleType = ImageView.ScaleType.FIT_CENTER
+        // Añadir un padding para que no toque los bordes si es necesario
+        val padding = (16 * resources.displayMetrics.density).toInt()
+        imageProfesionDetail.setPadding(padding, padding, padding, padding)
+        
+        // Fondo suave detrás del icono
+        imageProfesionDetail.setBackgroundResource(R.drawable.bg_detail_icon)
     }
 
     private fun esProfesionDeUsuario(p: Profesion): Boolean {

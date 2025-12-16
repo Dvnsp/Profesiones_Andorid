@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 
-    Item Producto Rediseñado
-    - Material CardView con elevación y esquinas redondeadas
-    - Diseño limpio y vertical
--->
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,59 +6,67 @@
     android:id="@+id/item_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardElevation="4dp"
-    app:cardCornerRadius="16dp"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="6dp"
     android:clickable="true"
     android:focusable="true"
-    android:foreground="?attr/selectableItemBackground">
+    app:cardElevation="2dp"
+    app:cardCornerRadius="16dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="#E0E0E0">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="16dp">
+        android:padding="16dp">
 
-        <!-- Imagen con esquinas superiores redondeadas (por el CardView) -->
-        <ImageView
-            android:id="@+id/imageProfesion"
-            android:layout_width="0dp"
-            android:layout_height="140dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/logo_bricco"
-            android:contentDescription="@string/app_name"
-            app:layout_constraintTop_toTopOf="parent"
+        <!-- Icono circular -->
+        <FrameLayout
+            android:id="@+id/iconContainer"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="@drawable/bg_icon_circle"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <ImageView
+                android:id="@+id/imageProfesion"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_handyman"
+                android:contentDescription="@string/detail_image_desc" />
+        </FrameLayout>
 
         <!-- Nombre -->
         <TextView
             android:id="@+id/textNombreProfesion"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginStart="16dp"
             android:textAppearance="?attr/textAppearanceTitleMedium"
-            android:textColor="?attr/colorOnSurface"
             android:textStyle="bold"
-            tools:text="FontaExpress"
-            app:layout_constraintTop_toBottomOf="@id/imageProfesion"
-            app:layout_constraintStart_toStartOf="parent"
+            android:maxLines="1"
+            android:ellipsize="end"
+            tools:text="FontaExpress (Fontanero)"
+            app:layout_constraintStart_toEndOf="@id/iconContainer"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Descripción / Zonas -->
+        <!-- Zonas -->
         <TextView
             android:id="@+id/textDescripcionProfesion"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginHorizontal="16dp"
-            android:textAppearance="?attr/textAppearanceBodyMedium"
-            android:textColor="?attr/colorOnSurfaceVariant"
-            android:maxLines="2"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="2dp"
+            android:textAppearance="?attr/textAppearanceBodySmall"
+            android:maxLines="1"
             android:ellipsize="end"
             tools:text="Zonas: Barcelona, Vic..."
+            app:layout_constraintStart_toEndOf="@id/iconContainer"
             app:layout_constraintTop_toBottomOf="@id/textNombreProfesion"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
         <!-- Precio -->
@@ -71,14 +74,14 @@
             android:id="@+id/textPrecioProfesion"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="6dp"
             android:textAppearance="?attr/textAppearanceLabelLarge"
-            android:textColor="?attr/colorPrimary"
             android:textStyle="bold"
+            android:textColor="?attr/colorPrimary"
             tools:text="50 €/hora"
+            app:layout_constraintStart_toEndOf="@id/iconContainer"
             app:layout_constraintTop_toBottomOf="@id/textDescripcionProfesion"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Fondo suave -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#F5F5F5"/> <!-- Superficie neutra -->
+            <corners android:radius="0dp"/> 
+        </shape>
+    </item>
+    
+    <!-- El icono se insertará programáticamente como src del ImageView. 
+         Pero si queremos un background decorativo, podemos usar un gradiente sutil -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient 
+                android:startColor="#10000000"
+                android:endColor="#00000000"
+                android:angle="270" />
+        </shape>
+    </item>
+</layer-list>
