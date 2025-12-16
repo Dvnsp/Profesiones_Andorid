@@ -5,79 +5,90 @@
     <string name="app_name">Bricco</string>
     <string name="dialog_ok">OK</string>
     <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_yes">Yes</string>
+    <string name="dialog_no">No</string>
+    <string name="not_available">N/A</string>
+
+    <!-- ===== SPLASH ===== -->
+    <!-- (uses app_name as contentDescription) -->
 
     <!-- ===== WELCOME ===== -->
     <string name="welcome_author">Duván Vargas</string>
     <string name="welcome_message">Welcome to the Bricco app</string>
     <string name="welcome_button_enter">Enter</string>
 
+    <!-- ===== LOGIN ===== -->
+    <string name="login_title">Sign in</string>
+    <string name="login_hint_username">Username</string>
+    <string name="login_hint_password">Password</string>
+    <string name="login_button">Enter</string>
+    <string name="login_go_register">Don’t have an account? Create one</string>
+    <string name="login_error_empty_fields">Username and password are required.</string>
+    <string name="login_error_incorrect">Incorrect username or password.</string>
+
+    <!-- ===== REGISTER ===== -->
+    <string name="register_title">Create account</string>
+    <string name="register_hint_username">Username</string>
+    <string name="register_hint_password">Password</string>
+    <string name="register_hint_repeat_password">Repeat password</string>
+    <string name="register_hint_name_optional">Full name (optional)</string>
+    <string name="register_hint_phone_optional">Phone (optional)</string>
+    <string name="register_hint_email_optional">Email (optional)</string>
+    <string name="register_button_create">Create account</string>
+    <string name="register_button_cancel">Cancel</string>
+    <string name="register_error_empty_fields">Username and passwords are required.</string>
+    <string name="register_error_password_mismatch">Passwords do not match.</string>
+    <string name="register_error_user_exists">This username already exists. Try another one.</string>
+    <string name="register_error_generic">Error creating the user. Please try again.</string>
+
     <!-- ===== MAIN / CATALOG ===== -->
     <string name="main_title">Bricco</string>
     <string name="main_button_reservar">View cart / Book</string>
 
-    <!-- Top menu -->
+    <!-- ===== TOP MENU ===== -->
     <string name="menu_action_cart">Cart</string>
     <string name="menu_action_scan_qr">Scan QR</string>
     <string name="menu_action_help">Help</string>
     <string name="menu_action_about">About</string>
 
-    <!-- Cart (MainActivity) -->
+    <!-- ===== CART ===== -->
     <string name="cart_title">Cart</string>
     <string name="cart_empty">The cart is empty.</string>
     <string name="cart_items_header">Professions in the cart:</string>
     <string name="cart_clear_all">Clear all</string>
     <string name="cart_cleared_ok">Cart cleared successfully.</string>
-
     <string name="cart_delete_title">Remove from cart</string>
-    <string name="cart_delete_message">
-        Do you want to remove %1$s (%2$s) from the cart?
-    </string>
+    <string name="cart_delete_message">Do you want to remove %1$s (%2$s) from the cart?</string>
 
-    <!-- Help / About -->
+    <!-- ===== HELP / ABOUT ===== -->
     <string name="help_title">Help</string>
-    <string name="help_main_message">
-        From this screen you can:\n\n• See the professions catalog.\n• Tap a profession to see its details.\n• Add professions to the cart.\n• Tap the Book button to choose date and time.\n• Use the cart icon to view, remove or clear items.\n• Use the three-dots menu to scan a QR code, open help or see information about the app.
-    </string>
-
+    <string name="help_main_message">From this screen you can:\n\n• See the professions catalog.\n• Tap a profession to see its details.\n• Add professions to the cart.\n• Tap the Book button to choose date and time.\n• Use the cart icon to view, remove or clear items.\n• Use the three-dots menu to scan a QR code, open help or see information about the app.</string>
     <string name="about_title">About</string>
-    <string name="about_main_message">
-        Bricco – Catalog of home services and professions.\n\nAuthor: Duván Vargas\nVersion: 1.0 (Android practice)
-    </string>
-
-    <!-- Reservation (messages used in MainActivity) -->
-    <string name="reservation_title">Booking</string>
-    <string name="reservation_need_items">
-        To book, first add at least one profession to the cart.
-    </string>
+    <string name="about_main_message">Bricco – Catalog of home services and professions.\n\nAuthor: Duván Vargas\nVersion: 1.0 (Android practice)</string>
 
     <!-- ===== DETAIL PROFESSION ===== -->
     <string name="detail_title">Details</string>
+    <string name="detail_name_format">%1$s (%2$s)</string>
     <string name="detail_default_zones">Areas not specified</string>
     <string name="detail_default_price">Price not available</string>
     <string name="detail_zones_label">Work areas: %1$s</string>
-
     <string name="detail_button_add_to_cart">Add to cart</string>
     <string name="detail_button_edit">Edit profession</string>
     <string name="detail_button_delete">Delete profession</string>
     <string name="detail_button_close">Close</string>
+    <string name="detail_image_desc">Profession image</string>
+    <string name="detail_qr_desc">Profession QR code</string>
 
-    <!-- Dialogs in detail -->
+    <!-- ===== DETAIL DIALOGS ===== -->
     <string name="dialog_cart_title">Cart</string>
-    <string name="dialog_cart_added_message">
-        Profession added to cart:\n\n%1$s (%2$s)
-    </string>
-
+    <string name="dialog_cart_added_message">Profession added to cart:\n\n%1$s (%2$s)</string>
     <string name="dialog_edit_title">Edit profession</string>
-    <string name="dialog_edit_message">
-        Edit mode will be implemented later reusing the add form.
-    </string>
-
+    <string name="dialog_edit_message">Edit mode will be implemented later reusing the add form.</string>
     <string name="dialog_delete_title">Delete profession</string>
-    <string name="dialog_delete_message">
-        Are you sure you want to delete %1$s (%2$s) from the catalog?
-    </string>
+    <string name="dialog_delete_message">Are you sure you want to delete %1$s (%2$s) from the catalog?</string>
+    <string name="dialog_delete_confirm">Delete</string>
 
-    <!-- QR text -->
+    <!-- ===== QR ===== -->
     <string name="qr_header">BRICCO – PROFESSIONAL CARD</string>
     <string name="qr_label_profession">Profession</string>
     <string name="qr_label_business_name">Business name</string>
@@ -85,7 +96,8 @@
     <string name="qr_label_zones">Work areas</string>
     <string name="qr_label_contact">Contact</string>
     <string name="qr_label_social">Social</string>
-    <!-- Add profession -->
+
+    <!-- ===== ADD PROFESSION ===== -->
     <string name="add_prof_title">New profession</string>
     <string name="add_prof_hint_nombre">Business name</string>
     <string name="add_prof_hint_profesion">Profession (plumber, carpenter...)</string>
@@ -93,6 +105,28 @@
     <string name="add_prof_hint_precio">Approx. price (e.g. 50 €/h)</string>
     <string name="add_prof_button_save">Save profession</string>
     <string name="add_prof_button_cancel">Cancel</string>
+    <string name="add_prof_error_title">Incomplete data</string>
+    <string name="add_prof_error_required">Name and profession are required.</string>
+    <string name="add_prof_error_duplicate_title">Duplicate profession</string>
+    <string name="add_prof_error_duplicate_message">A profession with the same name and type already exists.</string>
+    <string name="add_prof_success_title">Profession saved</string>
+    <string name="add_prof_success_message">The new profession has been added to the catalog.</string>
 
+    <!-- ===== RESERVATION ===== -->
+    <string name="reservation_title">Booking</string>
+    <string name="reservation_need_items">To book, first add at least one profession to the cart.</string>
+    <string name="reservation_cart_summary">Professions in the booking: %1$d</string>
+    <string name="reservation_item_format">%1$d. %2$s (%3$s)</string>
+    <string name="reservation_confirm_title">Confirm booking</string>
+    <string name="reservation_confirm_message">Are you sure you want to confirm the booking for %1$s at %2$s?</string>
+    <string name="reservation_button_confirm">Confirm booking</string>
+
+    <!-- ===== RESERVATION CONFIRMATION ===== -->
+    <string name="reservation_confirmation_title">Booking confirmed!</string>
+    <string name="reservation_confirmation_detail">Your booking has been made for %1$s at %2$s.</string>
+    <string name="reservation_confirmation_extra">Thank you for using Bricco. We will contact you soon to finalize the details.</string>
+    <string name="reservation_confirmation_back">Back to catalog</string>
+
+    <string name="menu_action_logout">Log out</string>
 
 </resources>

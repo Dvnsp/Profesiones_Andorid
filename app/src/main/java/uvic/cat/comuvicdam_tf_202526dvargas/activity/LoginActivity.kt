@@ -26,26 +26,21 @@ class LoginActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
 
-        // Referencias UI
         editTextUsername = findViewById(R.id.editTextUsername)
         editTextPassword = findViewById(R.id.editTextPassword)
         textLoginError = findViewById(R.id.textLoginError)
         buttonLogin = findViewById(R.id.buttonLogin)
         textGoRegister = findViewById(R.id.textGoRegister)
 
-        // Repo de usuarios
         usuarioRepository = UsuarioRepository(this)
 
         buttonLogin.setOnClickListener {
-            textLoginError.text = ""  // limpiar error anterior
+            textLoginError.text = ""
             realizarLogin()
         }
 
         textGoRegister.setOnClickListener {
-            // Más adelante irá a la pantalla de registro (RegisterActivity)
-            // De momento, solo dejaremos el Intent preparado y la crearemos luego.
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
 
@@ -54,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
         val password = editTextPassword.text.toString().trim()
 
         if (username.isEmpty() || password.isEmpty()) {
-            textLoginError.text = "Usuario y contraseña son obligatorios."
+            textLoginError.text = getString(R.string.login_error_empty_fields)
             return
         }
 
@@ -62,12 +57,10 @@ class LoginActivity : AppCompatActivity() {
 
         if (usuario != null) {
             Log.i("LoginActivity", "Login correcto: $usuario")
-            // Ir a MainActivity (catálogo) y cerrar el login
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         } else {
-            textLoginError.text = "Usuario o contraseña incorrectos."
+            textLoginError.text = getString(R.string.login_error_incorrect)
             Log.i("LoginActivity", "Login fallido para username=$username")
         }
     }

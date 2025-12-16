@@ -1,8 +1,10 @@
 package uvic.cat.comuvicdam_tf_202526dvargas.activity
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -11,7 +13,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import android.util.Log
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.WriterException
 import com.google.zxing.qrcode.QRCodeWriter
@@ -29,7 +30,6 @@ class ProfesionDetailActivity : AppCompatActivity() {
     private lateinit var imageQrProfesion: ImageView
     private lateinit var buttonAddToCart: Button
     private lateinit var buttonCerrarDetalle: Button
-
     private lateinit var buttonEditarProfesion: Button
     private lateinit var buttonEliminarProfesion: Button
 
@@ -40,11 +40,20 @@ class ProfesionDetailActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_profesion_detail)
 
+        configurarToolbar()
+        inicializarVistas()
+        cargarProfesion()
+        configurarBotones()
+    }
+
+    private fun configurarToolbar() {
         val toolbar: Toolbar = findViewById(R.id.toolbarDetail)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Detalle"
+        supportActionBar?.title = getString(R.string.detail_title)
+    }
 
+    private fun inicializarVistas() {
         imageProfesionDetail = findViewById(R.id.imageProfesionDetail)
         textNombreProfesionDetail = findViewById(R.id.textNombreProfesionDetail)
         textZonasProfesionDetail = findViewById(R.id.textZonasProfesionDetail)
@@ -52,10 +61,11 @@ class ProfesionDetailActivity : AppCompatActivity() {
         imageQrProfesion = findViewById(R.id.imageQrProfesion)
         buttonAddToCart = findViewById(R.id.buttonAddToCart)
         buttonCerrarDetalle = findViewById(R.id.buttonCerrarDetalle)
-
         buttonEditarProfesion = findViewById(R.id.buttonEditarProfesion)
         buttonEliminarProfesion = findViewById(R.id.buttonEliminarProfesion)
+    }
 
+    private fun cargarProfesion() {
         profesion = intent.getSerializableExtra("profesion") as? Profesion
         if (profesion == null) {
             finish()
@@ -67,22 +77,25 @@ class ProfesionDetailActivity : AppCompatActivity() {
         generarYMostrarQr(p)
 
         val esUsuario = esProfesionDeUsuario(p)
-        if (esUsuario) {
-            buttonEditarProfesion.visibility = View.VISIBLE
-            buttonEliminarProfesion.visibility = View.VISIBLE
-        } else {
-            buttonEditarProfesion.visibility = View.GONE
-            buttonEliminarProfesion.visibility = View.GONE
-        }
+        buttonEditarProfesion.visibility = if (esUsuario) View.VISIBLE else View.GONE
+        buttonEliminarProfesion.visibility = if (esUsuario) View.VISIBLE else View.GONE
+    }
+
+    private fun configurarBotones() {
+        val p = profesion ?: return
 
         buttonAddToCart.setOnClickListener {
             CarritoManager.add(p)
             AlertDialog.Builder(this)
-                .setTitle("Carrito")
-                .setMessage("Profesión añadida al carrito:\n\n${p.nombre} (${p.profesion})")
-                .setPositiveButton("Aceptar") { _, _ ->
-                    finish()
-                }
+                .setTitle(getString(R.string.dialog_cart_title))
+                .setMessage(
+                    getString(
+                        R.string.dialog_cart_added_message,
+                        p.nombre,
+                        p.profesion
+                    )
+                )
+                .setPositiveButton(getString(R.string.dialog_ok)) { _, _ -> finish() }
                 .show()
         }
 
@@ -91,11 +104,9 @@ class ProfesionDetailActivity : AppCompatActivity() {
         }
 
         buttonEditarProfesion.setOnClickListener {
-            AlertDialog.Builder(this)
-                .setTitle("Editar profesión")
-                .setMessage("Modo edición se implementará más adelante reutilizando el formulario de alta.")
-                .setPositiveButton("Aceptar", null)
-                .show()
+            val intent = Intent(this, AddProfesionActivity::class.java)
+            intent.putExtra("profesion_edit", p)
+            startActivity(intent)
         }
 
         buttonEliminarProfesion.setOnClickListener {
@@ -104,81 +115,91 @@ class ProfesionDetailActivity : AppCompatActivity() {
     }
 
     private fun mostrarDatosProfesion(p: Profesion) {
-        val nombreMostrar = "${p.nombre} (${p.profesion})"
-        textNombreProfesionDetail.text = nombreMostrar
+        textNombreProfesionDetail.text =
+            getString(R.string.detail_name_format, p.nombre, p.profesion)
 
-        val zonas = p.zonasTrabajo ?: "Zonas no especificadas"
-        textZonasProfesionDetail.text = "Zonas de trabajo: $zonas"
+        val zonas = p.zonasTrabajo?.ifBlank {
+            getString(R.string.detail_default_zones)
+        } ?: getString(R.string.detail_default_zones)
 
-        val precio = p.precio ?: "Precio no disponible"
-        textPrecioProfesionDetail.text = precio
+        textZonasProfesionDetail.text =
+            getString(R.string.detail_zones_label, zonas)
+
+        textPrecioProfesionDetail.text =
+            p.precio?.ifBlank {
+                getString(R.string.detail_default_price)
+            } ?: getString(R.string.detail_default_price)
 
         imageProfesionDetail.setImageResource(R.drawable.logo_bricco)
-        // El QR se genera en generarYMostrarQr(p)
     }
 
     private fun esProfesionDeUsuario(p: Profesion): Boolean {
-        fun campoVacio(valor: String?): Boolean =
-            valor == null || valor.trim().isEmpty()
-
-        return campoVacio(p.telefono) &&
-                campoVacio(p.categoria) &&
-                campoVacio(p.descripcion) &&
-                campoVacio(p.contacto) &&
-                campoVacio(p.redes)
+        fun vacio(valor: String?) = valor.isNullOrBlank()
+        return vacio(p.telefono) &&
+                vacio(p.categoria) &&
+                vacio(p.descripcion) &&
+                vacio(p.contacto) &&
+                vacio(p.redes)
     }
 
     private fun confirmarEliminarProfesion(p: Profesion) {
         AlertDialog.Builder(this)
-            .setTitle("Eliminar profesión")
-            .setMessage("¿Seguro que quieres eliminar '${p.nombre} (${p.profesion})' del catálogo?")
-            .setPositiveButton("Eliminar") { _, _ ->
+            .setTitle(getString(R.string.dialog_delete_title))
+            .setMessage(
+                getString(
+                    R.string.dialog_delete_message,
+                    p.nombre,
+                    p.profesion
+                )
+            )
+            .setPositiveButton(getString(R.string.dialog_delete_confirm)) { _, _ ->
                 DataManager.deleteProfesion(p)
                 CarritoManager.remove(p)
                 finish()
             }
-            .setNegativeButton("Cancelar", null)
+            .setNegativeButton(getString(R.string.dialog_cancel), null)
             .show()
     }
 
-    // ========= QR =========
+    // ===== QR =====
 
-    // 1) Texto completo que llevará el QR (con email, redes, etc.)
     private fun generarTextoQr(p: Profesion): String {
-        val precio = p.precio ?: "No indicado"
-        val zonas = p.zonasTrabajo ?: "No especificadas"
-        val contacto = p.contacto ?: "No indicado"
-        val redes = p.redes ?: "No indicadas"
-
         return """
-            BRICCO – TARJETA PROFESIONAL
+            ${getString(R.string.qr_header)}
 
-            Profesión: ${p.profesion}
-            Nombre comercial: ${p.nombre}
-            Precio orientativo: $precio
-            Zonas de trabajo: $zonas
+            ${getString(R.string.qr_label_profession)}: ${p.profesion}
+            ${getString(R.string.qr_label_business_name)}: ${p.nombre}
+            ${getString(R.string.qr_label_price)}: ${p.precio ?: "-"}
+            ${getString(R.string.qr_label_zones)}: ${p.zonasTrabajo ?: "-"}
 
-            Contacto: $contacto
-            Redes: $redes
+            ${getString(R.string.qr_label_contact)}: ${p.contacto ?: "-"}
+            ${getString(R.string.qr_label_social)}: ${p.redes ?: "-"}
         """.trimIndent()
     }
 
-    // 2) Generar el bitmap del QR y colocarlo en imageQrProfesion
     private fun generarYMostrarQr(p: Profesion) {
-        val contenido = generarTextoQr(p)
         val writer = QRCodeWriter()
         try {
-            val bitMatrix = writer.encode(contenido, BarcodeFormat.QR_CODE, 512, 512)
-            val width = bitMatrix.width
-            val height = bitMatrix.height
-            val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565)
+            val bitMatrix = writer.encode(
+                generarTextoQr(p),
+                BarcodeFormat.QR_CODE,
+                512,
+                512
+            )
 
-            for (x in 0 until width) {
-                for (y in 0 until height) { bitmap.setPixel(x, y, if (bitMatrix[x, y]) Color.BLACK else Color.WHITE)
+            val bitmap = Bitmap.createBitmap(512, 512, Bitmap.Config.RGB_565)
+            for (x in 0 until 512) {
+                for (y in 0 until 512) {
+                    bitmap.setPixel(
+                        x,
+                        y,
+                        if (bitMatrix[x, y]) Color.BLACK else Color.WHITE
+                    )
                 }
             }
 
             imageQrProfesion.setImageBitmap(bitmap)
+
         } catch (e: WriterException) {
             Log.e("ProfesionDetail", "Error generando QR", e)
         }

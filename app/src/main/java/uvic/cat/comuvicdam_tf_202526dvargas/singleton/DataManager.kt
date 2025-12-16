@@ -49,6 +49,35 @@ object DataManager {
             Log.w(TAG, "No se pudo actualizar el id en el objeto Profesion, pero se insertó en BD con id=$newId")
         }
     }
+    fun updateProfesion(profesion: Profesion) {
+        val id = profesion.id
+            ?: throw IllegalArgumentException("No se puede actualizar una profesión sin ID")
+
+        val db = getWritableDb()
+
+        val values = ContentValues().apply {
+            put(BriccoDbHelper.COL_PROF_NOMBRE, profesion.getNombre())
+            put(BriccoDbHelper.COL_PROF_PROFESION, profesion.getProfesion())
+            put(BriccoDbHelper.COL_PROF_TELEFONO, profesion.getTelefono())
+            put(BriccoDbHelper.COL_PROF_CATEGORIA, profesion.getCategoria())
+            put(BriccoDbHelper.COL_PROF_PRECIO, profesion.getPrecio())
+            put(BriccoDbHelper.COL_PROF_ZONAS, profesion.getZonasTrabajo())
+            put(BriccoDbHelper.COL_PROF_DESCRIPCION, profesion.getDescripcion())
+            put(BriccoDbHelper.COL_PROF_CONTACTO, profesion.getContacto())
+            put(BriccoDbHelper.COL_PROF_REDES, profesion.getRedes())
+        }
+
+        val rows = db.update(
+            BriccoDbHelper.TABLE_PROFESIONES,
+            values,
+            "${BriccoDbHelper.COL_PROF_ID} = ?",
+            arrayOf(id.toString())
+        )
+
+        Log.i(TAG, "updateProfesion: actualizadas $rows filas para id=$id")
+    }
+
+
 
     /**
      * Devuelve TODAS las profesiones de la base de datos.

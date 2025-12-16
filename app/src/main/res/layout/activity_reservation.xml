@@ -11,7 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        android:title="Reserva"
+        android:title="@string/reservation_title"
         android:titleTextColor="@android:color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,10 +22,7 @@
         android:id="@+id/textResumenCarrito"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="Profesiones en la reserva: 0"
+        android:layout_margin="16dp"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/toolbarReservation"
@@ -37,29 +34,24 @@
         android:id="@+id/textListadoProfesiones"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginHorizontal="16dp"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/textResumenCarrito"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Contenedor VERTICAL para fecha y hora (centrado) -->
+    <!-- Fecha y hora -->
     <LinearLayout
         android:id="@+id/layoutDateTime"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_margin="16dp"
         android:orientation="vertical"
         android:gravity="center_horizontal"
         app:layout_constraintTop_toBottomOf="@id/textListadoProfesiones"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- DatePicker en modo spinner, ahora con todo su ancho -->
         <DatePicker
             android:id="@+id/datePickerReserva"
             android:layout_width="wrap_content"
@@ -67,12 +59,6 @@
             android:calendarViewShown="false"
             android:datePickerMode="spinner" />
 
-        <!-- Separación pequeña -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="8dp" />
-
-        <!-- TimePicker en modo spinner -->
         <TimePicker
             android:id="@+id/timePickerReserva"
             android:layout_width="wrap_content"
@@ -80,7 +66,7 @@
             android:timePickerMode="spinner" />
     </LinearLayout>
 
-    <!-- Botones abajo fijados -->
+    <!-- Botones inferiores -->
     <LinearLayout
         android:id="@+id/layoutButtons"
         android:layout_width="0dp"
@@ -96,15 +82,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Cancelar" />
+            android:text="@string/dialog_cancel" />
 
         <Button
             android:id="@+id/buttonConfirmarReserva"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:text="Confirmar reserva" />
+            android:layout_marginStart="8dp"
+            android:text="@string/reservation_button_confirm" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

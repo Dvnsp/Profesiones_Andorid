@@ -29,7 +29,6 @@ class RegisterActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_register)
 
-        // Referencias UI
         editTextNewUsername = findViewById(R.id.editTextNewUsername)
         editTextNewPassword = findViewById(R.id.editTextNewPassword)
         editTextRepeatPassword = findViewById(R.id.editTextRepeatPassword)
@@ -48,7 +47,6 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         buttonCancelar.setOnClickListener {
-            // Simplemente volvemos al Login
             finish()
         }
     }
@@ -61,25 +59,22 @@ class RegisterActivity : AppCompatActivity() {
         val telefono = editTextTelefono.text.toString().trim()
         val email = editTextEmail.text.toString().trim()
 
-        // Validaciones básicas
         if (username.isEmpty() || password.isEmpty() || repeatPassword.isEmpty()) {
-            textRegisterError.text = "Usuario y contraseñas son obligatorios."
+            textRegisterError.text = getString(R.string.register_error_empty_fields)
             return
         }
 
         if (password != repeatPassword) {
-            textRegisterError.text = "Las contraseñas no coinciden."
+            textRegisterError.text = getString(R.string.register_error_password_mismatch)
             return
         }
 
-        // Comprobar si ya existe el usuario
         val existente = usuarioRepository.findByUsername(username)
         if (existente != null) {
-            textRegisterError.text = "Ese usuario ya existe. Prueba con otro."
+            textRegisterError.text = getString(R.string.register_error_user_exists)
             return
         }
 
-        // Crear objeto Usuario (entidad Java)
         val nuevoUsuario = Usuario(
             null,
             username,
@@ -92,10 +87,9 @@ class RegisterActivity : AppCompatActivity() {
         val newId = usuarioRepository.insert(nuevoUsuario)
 
         if (newId > 0) {
-            // Registro OK → volvemos al login
             finish()
         } else {
-            textRegisterError.text = "Error al crear el usuario. Inténtalo de nuevo."
+            textRegisterError.text = getString(R.string.register_error_generic)
         }
     }
 }

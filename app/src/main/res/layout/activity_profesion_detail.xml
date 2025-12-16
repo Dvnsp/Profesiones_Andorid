@@ -6,137 +6,101 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <!-- Toolbar superior -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarDetail"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        android:title="Detalle profesión"
+        android:title="@string/detail_title"
         android:titleTextColor="@android:color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Imagen grande de la profesión -->
     <ImageView
         android:id="@+id/imageProfesionDetail"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginTop="16dp"
-        android:contentDescription="@string/app_name"
-        android:scaleType="centerCrop"
+        android:contentDescription="@string/detail_image_desc"
         android:src="@drawable/logo_bricco"
         app:layout_constraintTop_toBottomOf="@id/toolbarDetail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Nombre -->
     <TextView
         android:id="@+id/textNombreProfesionDetail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Nombre (Profesión)"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="@android:color/black"
         android:gravity="center"
-        android:textAlignment="center"
         app:layout_constraintTop_toBottomOf="@id/imageProfesionDetail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Zonas -->
     <TextView
         android:id="@+id/textZonasProfesionDetail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Zonas de trabajo"
         android:textSize="14sp"
-        android:textColor="@android:color/darker_gray"
         android:gravity="center"
-        android:textAlignment="center"
         app:layout_constraintTop_toBottomOf="@id/textNombreProfesionDetail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Precio -->
     <TextView
         android:id="@+id/textPrecioProfesionDetail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="50 EUR/hora"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:textColor="@android:color/holo_blue_dark"
         android:gravity="center"
-        android:textAlignment="center"
         app:layout_constraintTop_toBottomOf="@id/textZonasProfesionDetail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Placeholder para el QR -->
     <ImageView
         android:id="@+id/imageQrProfesion"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        android:layout_marginTop="16dp"
-        android:contentDescription="QR de la profesión"
-        android:scaleType="fitCenter"
-        android:src="@drawable/logo_bricco"
+        android:contentDescription="@string/detail_qr_desc"
         app:layout_constraintTop_toBottomOf="@id/textPrecioProfesionDetail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Botón Añadir al carrito -->
     <Button
         android:id="@+id/buttonAddToCart"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Añadir al carrito"
+        android:text="@string/detail_button_add_to_cart"
         app:layout_constraintTop_toBottomOf="@id/imageQrProfesion"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-    <!-- Botón para editar profesión (solo si es del usuario) -->
-
-    <!-- Botón para eliminar profesión (solo si es del usuario) -->
 
     <Button
         android:id="@+id/buttonEditarProfesion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:text="Editar profesión"
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:text="@string/detail_button_edit"
+        app:layout_constraintTop_toBottomOf="@id/buttonAddToCart"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buttonAddToCart" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/buttonEliminarProfesion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Eliminar profesión"
-        android:textAllCaps="false"
+        android:text="@string/detail_button_delete"
         app:layout_constraintTop_toBottomOf="@id/buttonEditarProfesion"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-
-    <!-- Botón Cerrar -->
     <Button
         android:id="@+id/buttonCerrarDetalle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Cerrar"
-        app:layout_constraintTop_toBottomOf="@id/buttonAddToCart"
+        android:text="@string/detail_button_close"
+        app:layout_constraintTop_toBottomOf="@id/buttonEliminarProfesion"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

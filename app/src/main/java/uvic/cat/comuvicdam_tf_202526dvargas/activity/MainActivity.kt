@@ -96,6 +96,10 @@ class MainActivity : AppCompatActivity(), Producto_Adapter.OnItemClickListener {
                 mostrarAyuda()
                 true
             }
+            R.id.action_logout -> {
+                cerrarSesion()
+                true
+            }
             R.id.action_about -> {
                 mostrarAcercaDe()
                 true
@@ -219,6 +223,13 @@ class MainActivity : AppCompatActivity(), Producto_Adapter.OnItemClickListener {
         intent.putExtra("profesion", profesion)
         startActivity(intent)
     }
+    private fun cerrarSesion() {
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
+    }
+
 
     override fun onResume() {
         super.onResume()

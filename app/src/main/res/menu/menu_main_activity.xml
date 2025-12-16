@@ -26,4 +26,9 @@
         android:id="@+id/action_about"
         android:title="@string/menu_action_about"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_logout"
+        android:title="@string/menu_action_logout"
+        android:icon="@android:drawable/ic_lock_power_off"
+        android:showAsAction="never" />
 </menu>

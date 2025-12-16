@@ -21,10 +21,11 @@ class ReservationConfirmationActivity : AppCompatActivity() {
         textDetalleConfirmacion = findViewById(R.id.textDetalleConfirmacion)
         buttonVolverCatalogo = findViewById(R.id.buttonVolverCatalogo)
 
-        val fecha = intent.getStringExtra("fecha") ?: "N/D"
-        val hora = intent.getStringExtra("hora") ?: "N/D"
+        val fecha = intent.getStringExtra("fecha") ?: getString(R.string.not_available)
+        val hora = intent.getStringExtra("hora") ?: getString(R.string.not_available)
 
-        textDetalleConfirmacion.text = "Tu reserva se ha realizado para el día $fecha a las $hora."
+        textDetalleConfirmacion.text =
+            getString(R.string.reservation_confirmation_detail, fecha, hora)
 
         buttonVolverCatalogo.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)

@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import uvic.cat.comuvicdam_tf_202526dvargas.R
 import uvic.cat.comuvicdam_tf_202526dvargas.singleton.CarritoManager
-import java.util.Calendar
 
 class ReservationActivity : AppCompatActivity() {
 
@@ -31,9 +30,8 @@ class ReservationActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbarReservation)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Reserva"
+        supportActionBar?.title = getString(R.string.reservation_title)
 
-        // Si por alguna razón el carrito está vacío, salimos
         if (CarritoManager.isEmpty()) {
             finish()
             return
@@ -46,17 +44,23 @@ class ReservationActivity : AppCompatActivity() {
         buttonConfirmarReserva = findViewById(R.id.buttonConfirmarReserva)
         buttonCancelarReserva = findViewById(R.id.buttonCancelarReserva)
 
-        // Rellenar resumen de carrito
         val items = CarritoManager.getAll()
-        textResumenCarrito.text = "Profesiones en la reserva: ${items.size}"
+        textResumenCarrito.text =
+            getString(R.string.reservation_cart_summary, items.size)
 
         val builder = StringBuilder()
         items.forEachIndexed { index, profesion ->
-            builder.append("${index + 1}. ${profesion.nombre} (${profesion.profesion})\n")
+            builder.append(
+                getString(
+                    R.string.reservation_item_format,
+                    index + 1,
+                    profesion.nombre,
+                    profesion.profesion
+                )
+            ).append("\n")
         }
         textListadoProfesiones.text = builder.toString()
 
-        // Configurar TimePicker en 24h
         timePickerReserva.setIs24HourView(true)
 
         buttonConfirmarReserva.setOnClickListener {
@@ -74,38 +78,30 @@ class ReservationActivity : AppCompatActivity() {
     }
 
     private fun confirmarReserva() {
-        // Obtener fecha y hora seleccionadas
         val year = datePickerReserva.year
-        val month = datePickerReserva.month + 1 // DatePicker month es 0-11
+        val month = datePickerReserva.month + 1
         val day = datePickerReserva.dayOfMonth
 
-        val hour = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            timePickerReserva.hour
-        } else {
-            timePickerReserva.currentHour
-        }
-
-        val minute = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            timePickerReserva.minute
-        } else {
-            timePickerReserva.currentMinute
-        }
+        val hour = timePickerReserva.hour
+        val minute = timePickerReserva.minute
 
         val fechaTexto = String.format("%02d/%02d/%04d", day, month, year)
         val horaTexto = String.format("%02d:%02d", hour, minute)
 
-        val mensajeConfirmacion = "¿Seguro que quieres confirmar la reserva para el día $fechaTexto a las $horaTexto?"
+        val mensaje = getString(
+            R.string.reservation_confirm_message,
+            fechaTexto,
+            horaTexto
+        )
 
         AlertDialog.Builder(this)
-            .setTitle("Confirmar reserva")
-            .setMessage(mensajeConfirmacion)
-            .setPositiveButton("Sí") { _, _ ->
-                // Aquí podríamos guardar en BD una tabla de reservas, etc.
-                // De momento, vaciamos el carrito y vamos a la pantalla de confirmación.
+            .setTitle(getString(R.string.reservation_confirm_title))
+            .setMessage(mensaje)
+            .setPositiveButton(getString(R.string.dialog_yes)) { _, _ ->
                 CarritoManager.clear()
                 irAConfirmacion(fechaTexto, horaTexto)
             }
-            .setNegativeButton("No", null)
+            .setNegativeButton(getString(R.string.dialog_no), null)
             .show()
     }
 

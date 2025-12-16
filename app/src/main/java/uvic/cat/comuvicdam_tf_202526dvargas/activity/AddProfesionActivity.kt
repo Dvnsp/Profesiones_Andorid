@@ -20,26 +20,50 @@ class AddProfesionActivity : AppCompatActivity() {
     private lateinit var buttonGuardar: Button
     private lateinit var buttonCancelar: Button
 
+    private var profesionEdit: Profesion? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        // 👇 Si tu layout se llama distinto, cambia este nombre
         setContentView(R.layout.activity_add_profesion)
 
-        // Toolbar
+        configurarToolbar()
+        inicializarVistas()
+        cargarModoEdicion()
+        configurarBotones()
+    }
+
+    private fun configurarToolbar() {
         val toolbar: Toolbar = findViewById(R.id.toolbarAddProfesion)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Nueva profesión"
+    }
 
-        // Referencias a vistas
+    private fun inicializarVistas() {
         editNombre = findViewById(R.id.editNombre)
         editProfesion = findViewById(R.id.editProfesion)
         editZonas = findViewById(R.id.editZonas)
         editPrecio = findViewById(R.id.editPrecio)
         buttonGuardar = findViewById(R.id.buttonGuardarProfesion)
         buttonCancelar = findViewById(R.id.buttonCancelarProfesion)
+    }
 
+    private fun cargarModoEdicion() {
+        profesionEdit = intent.getSerializableExtra("profesion_edit") as? Profesion
+
+        if (profesionEdit != null) {
+            supportActionBar?.title = getString(R.string.detail_button_edit)
+
+            editNombre.setText(profesionEdit!!.nombre)
+            editProfesion.setText(profesionEdit!!.profesion)
+            editZonas.setText(profesionEdit!!.zonasTrabajo ?: "")
+            editPrecio.setText(profesionEdit!!.precio ?: "")
+        } else {
+            supportActionBar?.title = getString(R.string.add_prof_title)
+        }
+    }
+
+    private fun configurarBotones() {
         buttonGuardar.setOnClickListener {
             guardarProfesion()
         }
@@ -60,51 +84,62 @@ class AddProfesionActivity : AppCompatActivity() {
         val zonas = editZonas.text.toString().trim()
         val precio = editPrecio.text.toString().trim()
 
-        // 1) Validación básica
+        // Validación básica
         if (nombre.isEmpty() || profesionTexto.isEmpty()) {
             AlertDialog.Builder(this)
-                .setTitle("Datos incompletos")
-                .setMessage("Nombre y profesión son obligatorios.")
-                .setPositiveButton("Aceptar", null)
+                .setTitle(getString(R.string.add_prof_error_title))
+                .setMessage(getString(R.string.add_prof_error_required))
+                .setPositiveButton(getString(R.string.dialog_ok), null)
                 .show()
             return
         }
 
-        // 2) Comprobar duplicado (mismo nombre + profesión)
-        val existentes = DataManager.getProfesiones()
-        val yaExiste = existentes.any { it.nombre == nombre && it.profesion == profesionTexto }
+        // Comprobar duplicados (ignorando la profesión que se está editando)
+        val yaExiste = DataManager.getProfesiones().any {
+            it.nombre == nombre &&
+                    it.profesion == profesionTexto &&
+                    it != profesionEdit
+        }
 
         if (yaExiste) {
             AlertDialog.Builder(this)
-                .setTitle("Profesión duplicada")
-                .setMessage("Ya existe una profesión con ese nombre y tipo.")
-                .setPositiveButton("Aceptar", null)
+                .setTitle(getString(R.string.add_prof_error_duplicate_title))
+                .setMessage(getString(R.string.add_prof_error_duplicate_message))
+                .setPositiveButton(getString(R.string.dialog_ok), null)
                 .show()
             return
         }
 
-        // 3) Crear la nueva Profesion usando el MISMO constructor que usa DataManager
-        val nueva = Profesion(
-            null,                   // id -> null (SQLite lo genera con autoincrement)
-            nombre,                 // nombre comercial
-            profesionTexto,         // tipo de profesión
-            "",                     // teléfono (de momento vacío)
-            "",                     // categoría (vacía)
-            precio.ifEmpty { "" },  // precio
-            zonas.ifEmpty { "" },   // zonas de trabajo
-            "",                     // descripción
-            "",                     // contacto
-            ""                      // redes
-        )
+        if (profesionEdit == null) {
+            // ===== CREAR =====
+            val nueva = Profesion(
+                null,
+                nombre,
+                profesionTexto,
+                "",
+                "",
+                precio,
+                zonas,
+                "",
+                "",
+                ""
+            )
+            DataManager.addProfesion(nueva)
 
-        // 4) Guardar en la BD mediante DataManager
-        DataManager.addProfesion(nueva)
+        } else {
+            // ===== EDITAR =====
+            profesionEdit!!.nombre = nombre
+            profesionEdit!!.profesion = profesionTexto
+            profesionEdit!!.zonasTrabajo = zonas
+            profesionEdit!!.precio = precio
 
-        // 5) Avisar y volver al catálogo
+            DataManager.updateProfesion(profesionEdit!!)
+        }
+
         AlertDialog.Builder(this)
-            .setTitle("Profesión guardada")
-            .setMessage("La nueva profesión se ha añadido al catálogo.")
-            .setPositiveButton("Aceptar") { _, _ ->
+            .setTitle(getString(R.string.add_prof_success_title))
+            .setMessage(getString(R.string.add_prof_success_message))
+            .setPositiveButton(getString(R.string.dialog_ok)) { _, _ ->
                 finish()
             }
             .show()
