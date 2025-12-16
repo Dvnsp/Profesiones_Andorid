@@ -25,7 +25,6 @@
             android:background="?attr/colorPrimary"
             app:title="@string/detail_title"
             app:titleTextColor="@android:color/white"
-            app:navigationIcon="@drawable/baseline_add_24"
             app:navigationIconTint="@android:color/white" />
             <!-- Nota: El icono de navegación se gestionará por código si es necesario -->
 
