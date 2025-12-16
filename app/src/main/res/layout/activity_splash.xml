@@ -1,38 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<!-- 
+    Splash Screen Rediseñado
+    - Fondo con gradiente (background_splash)
+    - Tipografía moderna y espaciado limpio
+    - Mantiene IDs: splash_root, imageLogo, textAppName
+-->
+<androidx.constraintlayout.widget.ConstraintLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/splash_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black">
+    android:background="@drawable/background_splash">
 
-    <!-- Logo -->
     <ImageView
         android:id="@+id/imageLogo"
-        android:layout_width="220dp"
-        android:layout_height="220dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
         android:contentDescription="@string/app_name"
-        android:scaleType="fitCenter"
         android:src="@drawable/logo_bricco"
-        app:layout_constraintBottom_toTopOf="@id/textAppName"
+        android:elevation="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/textAppName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <!-- Nombre de la app -->
     <TextView
         android:id="@+id/textAppName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="sans-serif-black"
+        android:letterSpacing="0.1"
         android:text="@string/app_name"
-        android:textSize="24sp"
-        android:textStyle="bold"
         android:textColor="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@id/imageLogo"
+        android:textSize="34sp"
+        android:shadowColor="#40000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageLogo" />
+
+    <ProgressBar
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="48dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textAppName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

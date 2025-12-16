@@ -2,7 +2,11 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Comuvicdam_tf_202526Dvargas" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryVariant">@color/primaryLight</item>
+        <item name="colorSecondary">@color/secondaryColor</item>
+        <item name="android:colorBackground">@color/surfaceColor</item>
+        <item name="colorSurface">@color/surfaceColor</item>
     </style>
 
     <style name="Theme.Comuvicdam_tf_202526Dvargas" parent="Base.Theme.Comuvicdam_tf_202526Dvargas" />

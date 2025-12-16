@@ -1,56 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- 
+    Main Activity Rediseñado (Catálogo)
+    - AppBar Material Design 3
+    - RecyclerView con espaciado consistente
+    - Botón de reserva inferior destacado
+    - FAB con estilo M3
+    - Root: ConstraintLayout para compatibilidad
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface">
 
-    <!-- Toolbar superior -->
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbarMain"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        android:title="@string/main_title"
-        android:titleTextColor="@android:color/white"
+        app:title="@string/main_title"
+        app:titleTextColor="@android:color/white"
+        android:elevation="4dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- RecyclerView del catálogo de profesiones -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerProfesiones"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:paddingHorizontal="12dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
         android:clipToPadding="false"
-        android:padding="8dp"
         app:layout_constraintTop_toBottomOf="@id/toolbarMain"
-        app:layout_constraintBottom_toTopOf="@id/buttonReservar"
+        app:layout_constraintBottom_toTopOf="@id/cardBottomPanel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Botón inferior para ir a la reserva -->
-    <Button
-        android:id="@+id/buttonReservar"
+    <!-- Panel inferior para el botón de reserva -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardBottomPanel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:text="@string/main_button_reservar"
-        android:textAllCaps="false"
-        android:textSize="16sp"
+        app:cardElevation="16dp"
+        app:cardCornerRadius="0dp"
+        android:backgroundTint="?attr/colorSurface"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <!-- FAB para añadir nueva profesión -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonReservar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="16dp"
+            android:text="@string/main_button_reservar"
+            android:textSize="16sp"
+            app:icon="@drawable/baseline_shopping_cart_24"
+            app:iconGravity="textStart"
+            app:cornerRadius="12dp" />
+
+    </com.google.android.material.card.MaterialCardView>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddProfesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:contentDescription="Añadir profesión"
         app:srcCompat="@drawable/baseline_add_24"
-        app:layout_constraintBottom_toTopOf="@id/buttonReservar"
+        app:backgroundTint="?attr/colorSecondary"
+        app:layout_constraintBottom_toTopOf="@id/cardBottomPanel"
         app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
