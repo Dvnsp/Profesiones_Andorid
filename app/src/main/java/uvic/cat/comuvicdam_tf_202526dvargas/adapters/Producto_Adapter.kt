@@ -44,22 +44,35 @@ class Producto_Adapter(
     override fun onBindViewHolder(holder: ProfesionViewHolder, position: Int) {
         val profesion = listaProfesiones[position]
 
-        // Nombre + tipo de profesión
-        val nombreMostrar = "${profesion.nombre} (${profesion.profesion})"
-        holder.textNombreProfesion.text = nombreMostrar
+        // Nombre + tipo
+        holder.textNombreProfesion.text =
+            "${profesion.nombre} (${profesion.profesion})"
 
-        // Descripción corta: Zonas
-        val zonas = profesion.zonasTrabajo ?: ""
-        holder.textDescripcionProfesion.text = "Zonas: $zonas"
+        // Zonas
+        holder.textDescripcionProfesion.text =
+            "Zonas: ${profesion.zonasTrabajo ?: ""}"
 
         // Precio
-        val precio = profesion.precio ?: ""
-        holder.textPrecioProfesion.text = precio
+        holder.textPrecioProfesion.text =
+            profesion.precio ?: ""
 
-        // Imagen según tipo de profesión (de momento logo genérico)
-        // Más adelante aquí pondremos un when(profesion.profesion) para cambiar el icono
-        holder.imageProfesion.setImageResource(R.drawable.logo_bricco)
+        // ICONO SEGÚN PROFESIÓN (CLAVE)
+        val iconRes = when (profesion.profesion.lowercase()) {
+            "fontanero" -> R.drawable.ic_plumber
+            "electricista" -> R.drawable.ic_electrician
+            "carpintero" -> R.drawable.ic_carpenter
+            "pintor" -> R.drawable.ic_painter
+            "albañil" -> R.drawable.ic_handyman
+
+            "jardinero" -> R.drawable.ic_gardener
+            "cerrajero" -> R.drawable.ic_locksmith
+            "manitas" -> R.drawable.ic_handyman
+            else -> R.drawable.ic_handyman
+        }
+
+        holder.imageProfesion.setImageResource(iconRes)
     }
+
 
     override fun getItemCount(): Int = listaProfesiones.size
 }
