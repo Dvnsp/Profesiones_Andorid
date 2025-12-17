@@ -1,11 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 
-    Profession Detail Screen Rediseñado
-    - Diseño moderno con Cards para agrupar información
-    - ScrollView para contenido extenso
-    - Botones con jerarquía visual (Añadir destacado, acciones secundarias)
-    - Reorganización: Botones Editar y Eliminar movidos debajo del QR
--->
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -14,6 +7,7 @@
     android:layout_height="match_parent"
     android:background="?attr/colorSurface">
 
+    <!-- APP BAR -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -26,10 +20,9 @@
             app:title="@string/detail_title"
             app:titleTextColor="@android:color/white"
             app:navigationIconTint="@android:color/white" />
-            <!-- Nota: El icono de navegación se gestionará por código si es necesario -->
-
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!-- CONTENIDO -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -41,14 +34,13 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Card Principal: Imagen e Info Básica -->
+            <!-- CARD PRINCIPAL -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                app:cardElevation="2dp"
                 app:cardCornerRadius="16dp"
-                app:strokeWidth="0dp">
+                app:cardElevation="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -92,17 +84,16 @@
                         android:layout_marginHorizontal="16dp"
                         android:textAppearance="?attr/textAppearanceBodyMedium"
                         android:textColor="?attr/colorOnSurfaceVariant" />
-
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Card QR + Botones de gestión (Editar/Eliminar) -->
+            <!-- CARD QR -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                app:cardElevation="2dp"
-                app:cardCornerRadius="16dp">
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -125,55 +116,41 @@
                         android:contentDescription="@string/detail_qr_desc"
                         android:layout_marginBottom="16dp" />
 
-                    <!-- Botones Editar / Eliminar movidos aquí -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:baselineAligned="false"
                         android:gravity="center">
 
-                        <LinearLayout
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/buttonEditarProfesion"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:paddingEnd="4dp">
-                            
-                            <com.google.android.material.button.MaterialButton
-                                android:id="@+id/buttonEditarProfesion"
-                                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/detail_button_edit" />
-                        </LinearLayout>
+                            android:layout_marginEnd="4dp"
+                            android:text="@string/detail_button_edit" />
 
-                        <LinearLayout
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/buttonEliminarProfesion"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:paddingStart="4dp">
-
-                            <com.google.android.material.button.MaterialButton
-                                android:id="@+id/buttonEliminarProfesion"
-                                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/detail_button_delete"
-                                android:textColor="?attr/colorError"
-                                app:strokeColor="?attr/colorError" />
-                        </LinearLayout>
+                            android:layout_marginStart="4dp"
+                            android:text="@string/detail_button_delete"
+                            android:textColor="?attr/colorError"
+                            app:strokeColor="?attr/colorError" />
                     </LinearLayout>
-
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Botones de Acción Globales -->
+            <!-- BOTONES -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonAddToCart"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:text="@string/detail_button_add_to_cart"
-                android:textSize="16sp"
                 app:icon="@drawable/baseline_shopping_cart_24"
                 app:iconGravity="textStart"
                 app:cornerRadius="12dp"

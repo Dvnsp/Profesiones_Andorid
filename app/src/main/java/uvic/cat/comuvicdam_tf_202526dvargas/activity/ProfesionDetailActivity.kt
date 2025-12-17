@@ -50,7 +50,7 @@ class ProfesionDetailActivity : AppCompatActivity() {
     private fun configurarToolbar() {
         val toolbar: Toolbar = findViewById(R.id.toolbarDetail)
         setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        // ❌ No se habilita el botón Up para evitar flecha no funcional
         supportActionBar?.title = getString(R.string.detail_title)
     }
 
@@ -131,7 +131,6 @@ class ProfesionDetailActivity : AppCompatActivity() {
                 getString(R.string.detail_default_price)
             } ?: getString(R.string.detail_default_price)
 
-        // Configurar icono según profesión (lógica copiada del Adapter para consistencia)
         val iconResId = when (p.profesion?.lowercase()?.trim()) {
             "fontanero" -> R.drawable.ic_plumber
             "electricista" -> R.drawable.ic_electrician
@@ -143,16 +142,13 @@ class ProfesionDetailActivity : AppCompatActivity() {
         }
 
         imageProfesionDetail.setImageResource(iconResId)
-        // Aplicar tinte primario al icono para que coincida con el tema (opcional, pero consistente)
-        imageProfesionDetail.setColorFilter(ContextCompat.getColor(this, R.color.primaryColor))
-        
-        // Ajustar el scaleType para que el icono se vea bien dentro del espacio reservado
+        imageProfesionDetail.setColorFilter(
+            ContextCompat.getColor(this, R.color.primaryColor)
+        )
         imageProfesionDetail.scaleType = ImageView.ScaleType.FIT_CENTER
-        // Añadir un padding para que no toque los bordes si es necesario
+
         val padding = (16 * resources.displayMetrics.density).toInt()
         imageProfesionDetail.setPadding(padding, padding, padding, padding)
-        
-        // Fondo suave detrás del icono
         imageProfesionDetail.setBackgroundResource(R.drawable.bg_detail_icon)
     }
 
@@ -183,8 +179,6 @@ class ProfesionDetailActivity : AppCompatActivity() {
             .setNegativeButton(getString(R.string.dialog_cancel), null)
             .show()
     }
-
-    // ===== QR =====
 
     private fun generarTextoQr(p: Profesion): String {
         return """
@@ -222,10 +216,5 @@ class ProfesionDetailActivity : AppCompatActivity() {
         } catch (e: WriterException) {
             Log.e("ProfesionDetail", "Error generando QR", e)
         }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        finish()
-        return true
     }
 }

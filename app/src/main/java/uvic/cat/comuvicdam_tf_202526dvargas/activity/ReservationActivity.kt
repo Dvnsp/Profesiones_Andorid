@@ -27,23 +27,36 @@ class ReservationActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_reservation)
 
-        val toolbar: Toolbar = findViewById(R.id.toolbarReservation)
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = getString(R.string.reservation_title)
+        configurarToolbar()
 
         if (CarritoManager.isEmpty()) {
             finish()
             return
         }
 
+        inicializarVistas()
+        cargarResumenCarrito()
+        configurarPickers()
+        configurarBotones()
+    }
+
+    private fun configurarToolbar() {
+        val toolbar: Toolbar = findViewById(R.id.toolbarReservation)
+        setSupportActionBar(toolbar)
+        // ❌ No se habilita botón Up (evitamos flecha no funcional)
+        supportActionBar?.title = getString(R.string.reservation_title)
+    }
+
+    private fun inicializarVistas() {
         textResumenCarrito = findViewById(R.id.textResumenCarrito)
         textListadoProfesiones = findViewById(R.id.textListadoProfesiones)
         datePickerReserva = findViewById(R.id.datePickerReserva)
         timePickerReserva = findViewById(R.id.timePickerReserva)
         buttonConfirmarReserva = findViewById(R.id.buttonConfirmarReserva)
         buttonCancelarReserva = findViewById(R.id.buttonCancelarReserva)
+    }
 
+    private fun cargarResumenCarrito() {
         val items = CarritoManager.getAll()
         textResumenCarrito.text =
             getString(R.string.reservation_cart_summary, items.size)
@@ -60,9 +73,13 @@ class ReservationActivity : AppCompatActivity() {
             ).append("\n")
         }
         textListadoProfesiones.text = builder.toString()
+    }
 
+    private fun configurarPickers() {
         timePickerReserva.setIs24HourView(true)
+    }
 
+    private fun configurarBotones() {
         buttonConfirmarReserva.setOnClickListener {
             confirmarReserva()
         }
@@ -70,11 +87,6 @@ class ReservationActivity : AppCompatActivity() {
         buttonCancelarReserva.setOnClickListener {
             finish()
         }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        finish()
-        return true
     }
 
     private fun confirmarReserva() {
