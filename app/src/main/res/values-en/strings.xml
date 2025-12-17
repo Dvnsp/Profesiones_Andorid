@@ -132,4 +132,11 @@
     <string name="login_error_pass_required">Password is required</string>
     <string name="login_error_invalid_credentials">Invalid username or password</string>
 
+    <!-- Reservation -->
+
+    <string name="reservation_summary">Summary</string>
+    <string name="reservation_date">Date</string>
+    <string name="reservation_time">Time</string>
+
+
 </resources>

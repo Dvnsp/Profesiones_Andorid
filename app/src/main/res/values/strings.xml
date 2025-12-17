@@ -134,5 +134,11 @@
     <string name="login_error_pass_required">Contraseña obligatoria</string>
     <string name="login_error_invalid_credentials">Usuario o contraseña incorrectos</string>
 
+    <!-- Reservation -->
+
+    <string name="reservation_summary">Resumen</string>
+    <string name="reservation_date">Fecha</string>
+    <string name="reservation_time">Hora</string>
+
 
 </resources>
