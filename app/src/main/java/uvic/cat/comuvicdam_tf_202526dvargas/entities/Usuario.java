@@ -2,7 +2,7 @@ package uvic.cat.comuvicdam_tf_202526dvargas.entities;
 
 public class Usuario {
 
-    private Long id;                // lo usaremos más adelante en SQLite
+    private Long id;
     private String username;        // para iniciar sesión
     private String password;        // para iniciar sesión
     private String nombreCompleto;  // opcional

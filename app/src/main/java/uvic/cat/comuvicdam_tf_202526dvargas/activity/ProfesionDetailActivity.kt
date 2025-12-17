@@ -48,7 +48,7 @@ class ProfesionDetailActivity : AppCompatActivity() {
     private fun configurarToolbar() {
         val toolbar: Toolbar = findViewById(R.id.toolbarDetail)
         setSupportActionBar(toolbar)
-        // No se habilita botón Up para evitar navegación ambigua
+
         supportActionBar?.title = getString(R.string.detail_title)
     }
 
@@ -184,11 +184,7 @@ class ProfesionDetailActivity : AppCompatActivity() {
             val bitmap = Bitmap.createBitmap(512, 512, Bitmap.Config.RGB_565)
             for (x in 0 until 512) {
                 for (y in 0 until 512) {
-                    bitmap.setPixel(
-                        x,
-                        y,
-                        if (bitMatrix[x, y]) Color.BLACK else Color.WHITE
-                    )
+                    bitmap.setPixel(x, y, if (bitMatrix[x, y]) Color.BLACK else Color.WHITE)
                 }
             }
 

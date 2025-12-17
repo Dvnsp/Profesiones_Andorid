@@ -4,14 +4,13 @@ import java.io.Serializable;
 
 public class Profesion implements Serializable {
 
-    private Long id;              // id interno para SQLite más adelante
+    private Long id;
 
-    // ✅ CAMPOS OBLIGATORIOS
+
     private String nombre;        // nombre comercial: "FontaExpress"
     private String profesion;     // tipo: "Fontanero"
     private String telefono;      // teléfono de contacto
 
-    // 🟡 CAMPOS OPCIONALES
     private String categoria;     // "Fontanería", "Electricidad", etc.
     private String precio;        // "50 EUR/hora"
     private String zonasTrabajo;  // "Barcelona, Vic, Les Masies de Roda"

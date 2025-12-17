@@ -295,7 +295,7 @@ object DataManager {
             Profesion(
                 null,
                 "ClimaPerfect",
-                "Instalador de aire acondicionado",
+                "Tecnico de aire acondicionado",
                 "+34 600 111 009",
                 "Climatización",
                 "80 EUR/servicio",

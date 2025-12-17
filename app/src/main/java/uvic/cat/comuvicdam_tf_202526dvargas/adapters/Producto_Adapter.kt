@@ -62,11 +62,13 @@ class Producto_Adapter(
             "electricista" -> R.drawable.ic_electrician
             "carpintero" -> R.drawable.ic_carpenter
             "pintor" -> R.drawable.ic_painter
-            "albañil" -> R.drawable.ic_handyman
-
+            "albañil" -> R.drawable.ic_mason
             "jardinero" -> R.drawable.ic_gardener
             "cerrajero" -> R.drawable.ic_locksmith
-            "manitas" -> R.drawable.ic_handyman
+            "manitas" -> R.drawable.ic_handyman1
+            "instalador de aire acondicionado" -> R.drawable.ic_ac
+
+
             else -> R.drawable.ic_handyman
         }
 
