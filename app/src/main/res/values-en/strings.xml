@@ -128,5 +128,8 @@
     <string name="reservation_confirmation_back">Back to catalog</string>
 
     <string name="menu_action_logout">Log out</string>
+    <string name="login_error_user_required">Username is required</string>
+    <string name="login_error_pass_required">Password is required</string>
+    <string name="login_error_invalid_credentials">Invalid username or password</string>
 
 </resources>

@@ -13,7 +13,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.WriterException
 import com.google.zxing.qrcode.QRCodeWriter
@@ -24,7 +23,6 @@ import uvic.cat.comuvicdam_tf_202526dvargas.singleton.DataManager
 
 class ProfesionDetailActivity : AppCompatActivity() {
 
-    private lateinit var imageProfesionDetail: ImageView
     private lateinit var textNombreProfesionDetail: TextView
     private lateinit var textZonasProfesionDetail: TextView
     private lateinit var textPrecioProfesionDetail: TextView
@@ -50,12 +48,11 @@ class ProfesionDetailActivity : AppCompatActivity() {
     private fun configurarToolbar() {
         val toolbar: Toolbar = findViewById(R.id.toolbarDetail)
         setSupportActionBar(toolbar)
-        // ❌ No se habilita el botón Up para evitar flecha no funcional
+        // No se habilita botón Up para evitar navegación ambigua
         supportActionBar?.title = getString(R.string.detail_title)
     }
 
     private fun inicializarVistas() {
-        imageProfesionDetail = findViewById(R.id.imageProfesionDetail)
         textNombreProfesionDetail = findViewById(R.id.textNombreProfesionDetail)
         textZonasProfesionDetail = findViewById(R.id.textZonasProfesionDetail)
         textPrecioProfesionDetail = findViewById(R.id.textPrecioProfesionDetail)
@@ -130,26 +127,6 @@ class ProfesionDetailActivity : AppCompatActivity() {
             p.precio?.ifBlank {
                 getString(R.string.detail_default_price)
             } ?: getString(R.string.detail_default_price)
-
-        val iconResId = when (p.profesion?.lowercase()?.trim()) {
-            "fontanero" -> R.drawable.ic_plumber
-            "electricista" -> R.drawable.ic_electrician
-            "carpintero", "ebanista" -> R.drawable.ic_carpenter
-            "pintor" -> R.drawable.ic_painter
-            "jardinero" -> R.drawable.ic_gardener
-            "cerrajero" -> R.drawable.ic_locksmith
-            else -> R.drawable.ic_handyman
-        }
-
-        imageProfesionDetail.setImageResource(iconResId)
-        imageProfesionDetail.setColorFilter(
-            ContextCompat.getColor(this, R.color.primaryColor)
-        )
-        imageProfesionDetail.scaleType = ImageView.ScaleType.FIT_CENTER
-
-        val padding = (16 * resources.displayMetrics.density).toInt()
-        imageProfesionDetail.setPadding(padding, padding, padding, padding)
-        imageProfesionDetail.setBackgroundResource(R.drawable.bg_detail_icon)
     }
 
     private fun esProfesionDeUsuario(p: Profesion): Boolean {
@@ -207,7 +184,11 @@ class ProfesionDetailActivity : AppCompatActivity() {
             val bitmap = Bitmap.createBitmap(512, 512, Bitmap.Config.RGB_565)
             for (x in 0 until 512) {
                 for (y in 0 until 512) {
-                    bitmap.setPixel(x, y, if (bitMatrix[x, y]) Color.BLACK else Color.WHITE)
+                    bitmap.setPixel(
+                        x,
+                        y,
+                        if (bitMatrix[x, y]) Color.BLACK else Color.WHITE
+                    )
                 }
             }
 

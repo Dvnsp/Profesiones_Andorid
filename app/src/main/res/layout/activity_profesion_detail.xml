@@ -9,6 +9,7 @@
 
     <!-- APP BAR -->
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -18,14 +19,14 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:title="@string/detail_title"
-            app:titleTextColor="@android:color/white"
-            app:navigationIconTint="@android:color/white" />
+            app:titleTextColor="@android:color/white" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <!-- CONTENIDO -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -34,7 +35,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- CARD PRINCIPAL -->
+            <!-- CARD PRINCIPAL (SIN IMAGEN) -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -46,22 +47,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingBottom="16dp">
-
-                    <ImageView
-                        android:id="@+id/imageProfesionDetail"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:scaleType="centerCrop"
-                        android:contentDescription="@string/detail_image_desc"
-                        android:src="@drawable/logo_bricco" />
+                    android:padding="16dp">
 
                     <TextView
                         android:id="@+id/textNombreProfesionDetail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginHorizontal="16dp"
                         android:textAppearance="?attr/textAppearanceHeadlineSmall"
                         android:textStyle="bold"
                         android:textColor="?attr/colorOnSurface" />
@@ -71,7 +62,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:layout_marginHorizontal="16dp"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         android:textColor="?attr/colorPrimary"
                         android:textStyle="bold" />
@@ -81,7 +71,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:layout_marginHorizontal="16dp"
                         android:textAppearance="?attr/textAppearanceBodyMedium"
                         android:textColor="?attr/colorOnSurfaceVariant" />
                 </LinearLayout>

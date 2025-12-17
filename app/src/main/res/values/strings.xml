@@ -129,4 +129,10 @@
 
     <string name="menu_action_logout">Cerrar sesión</string>
 
+    <!-- ERRORES LOGIN -->
+    <string name="login_error_user_required">Usuario obligatorio</string>
+    <string name="login_error_pass_required">Contraseña obligatoria</string>
+    <string name="login_error_invalid_credentials">Usuario o contraseña incorrectos</string>
+
+
 </resources>
