@@ -24,7 +24,6 @@
             android:background="?attr/colorPrimary"
             app:title="@string/reservation_title"
             app:titleTextColor="@android:color/white"
-            app:navigationIcon="@drawable/baseline_add_24" 
             app:navigationIconTint="@android:color/white" />
             <!-- El icono de back se seteará programáticamente o por defecto -->
 

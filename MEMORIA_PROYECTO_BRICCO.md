@@ -144,7 +144,7 @@ El código del proyecto es propietario. Las librerías de terceros utilizadas se
 *   **Entorno de Desarrollo:** Android Studio
 *   **Sistema de Build:** Gradle
 
-### **52. Identificador y Versionado**
+### **5.2. Identificador y Versionado**
 
 *   **Application ID:** `uvic.cat.comuvicdam_tf_202526dvargas`
 *   **Versión de Código:** `1`
@@ -207,7 +207,7 @@ El proyecto se apoya en las siguientes librerías externas, gestionadas a travé
 *   **ZXing (com.journeyapps:zxing-android-embedded, com.google.zxing:core):** Librería para la generación y escaneo de códigos de barras y QR. Se utiliza para la funcionalidad de la cámara.
 *   **JUnit & Espresso (junit, androidx.test.ext:junit, androidx.test.espresso:core):** Frameworks para la realización de tests unitarios y de instrumentación.
 
-### **73. Persistencia de Datos**
+### **7.3. Persistencia de Datos**
 
 La persistencia de datos se gestiona íntegramente a través de una base de datos **SQLite** local.
 
