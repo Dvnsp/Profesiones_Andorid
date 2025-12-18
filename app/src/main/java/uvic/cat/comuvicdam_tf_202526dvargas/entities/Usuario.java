@@ -9,7 +9,7 @@ public class Usuario {
     private String telefono;        // opcional
     private String email;           // opcional
 
-    // Constructor vacío (necesario para algunos usos con BD, etc.)
+
     public Usuario() {
     }
 

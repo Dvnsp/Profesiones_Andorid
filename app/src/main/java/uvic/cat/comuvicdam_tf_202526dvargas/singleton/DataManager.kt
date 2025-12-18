@@ -306,7 +306,7 @@ object DataManager {
             ),
             Profesion(
                 null,
-                "Manitas Hogar+",
+                "Manitas Hogar",
                 "Manitas",
                 "+34 600 111 010",
                 "Mantenimiento",

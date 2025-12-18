@@ -88,10 +88,6 @@ class MainActivity : AppCompatActivity(), Producto_Adapter.OnItemClickListener {
                 mostrarCarrito()
                 true
             }
-            R.id.action_scan_qr -> {
-                escanearQR()
-                true
-            }
             R.id.action_help -> {
                 mostrarAyuda()
                 true
@@ -178,19 +174,7 @@ class MainActivity : AppCompatActivity(), Producto_Adapter.OnItemClickListener {
             .show()
     }
 
-    // ===== QR =====
 
-    private fun escanearQR() {
-        val options = ScanOptions().apply {
-            setDesiredBarcodeFormats(ScanOptions.QR_CODE)
-            setPrompt("Escanea el código QR de la profesión")
-            setCameraId(0)
-            setBeepEnabled(true)
-            setBarcodeImageEnabled(false)
-        }
-
-        qrLauncher.launch(options)
-    }
 
     private fun mostrarResultadoQR(textoQR: String) {
         AlertDialog.Builder(this)

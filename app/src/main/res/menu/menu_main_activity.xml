@@ -10,10 +10,7 @@
         app:showAsAction="always" />
 
     <!-- Escanear QR (en los tres puntos) -->
-    <item
-        android:id="@+id/action_scan_qr"
-        android:title="@string/menu_action_scan_qr"
-        app:showAsAction="never" />
+
 
     <!-- Ayuda -->
     <item
