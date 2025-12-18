@@ -9,9 +9,6 @@
         android:icon="@drawable/baseline_shopping_cart_24"
         app:showAsAction="always" />
 
-    <!-- Escanear QR (en los tres puntos) -->
-
-
     <!-- Ayuda -->
     <item
         android:id="@+id/action_help"

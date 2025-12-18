@@ -64,7 +64,7 @@
     <string name="help_title">Ayuda</string>
     <string name="help_main_message">Desde esta pantalla puedes:\n\n• Ver el catálogo de profesiones.\n• Pulsar sobre una profesión para ver su detalle.\n• Añadir profesiones al carrito.\n• Pulsar el botón Reservar para elegir fecha y hora.\n• Usar el icono del carrito para ver, eliminar o vaciar las profesiones añadidas.\n• Usar el menú de los tres puntos para escanear un QR, ver ayuda o ver información de la app.</string>
     <string name="about_title">Acerca de</string>
-    <string name="about_main_message">Bricco – Catálogo de profesiones y servicios del hogar.\n\nAutor: Duván Vargas\nVersión: 1.0 (práctica Android)</string>
+    <string name="about_main_message">Bricco – Catálogo de profesiones y servicios del hogar.\n\nAutor: Duván Vargas</string>
 
     <!-- ===== DETALLE PROFESIÓN ===== -->
     <string name="detail_title">Detalle</string>
